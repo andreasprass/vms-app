@@ -42,6 +42,4 @@ Summary: This Visitor Management System streamlines the process of managing comp
 -   Role-based access control for different system users (e.g., Admins, Receptionists, Hosts).
 -   Responsive design, ensuring accessibility on tablets, mobile devices, and desktop computers.
 
-===
-
 This system would be particularly useful for companies aiming to streamline visitor management while ensuring security and compliance. The use of Laravel Livewire allows for a more dynamic and efficient user experience, minimizing page reloads.
