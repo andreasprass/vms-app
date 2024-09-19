@@ -23,12 +23,27 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $randNik = '';
+        for ($i = 0; $i < 4; $i++) {
+            $randNik .= str_pad(mt_rand(0, 9999), 4, '0', STR_PAD_LEFT);
+        }
+        $randNip = '';
+        for ($i = 0; $i < 4; $i++) {
+            $randNip .= str_pad(mt_rand(0, 9999), 4, '0', STR_PAD_LEFT);
+        }
+
         return [
+            'id' => Str::ulid(),
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
+            'nik' => $randNik,
+            'nip' => $randNip,
+            'id_position' => mt_rand(1,5),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'status' => mt_rand(0,1),
             'remember_token' => Str::random(10),
+
         ];
     }
 
