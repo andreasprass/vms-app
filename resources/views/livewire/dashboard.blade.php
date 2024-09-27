@@ -1,7 +1,13 @@
 <div class="w-full relative min-h-screen flex" 
      x-data="{ sideNav: false, isSmallScreen: window.innerWidth < 768 }"
-     x-init="$watch('isSmallScreen', value => { if (!value) sideNav = false; })"
-     @resize.window="isSmallScreen = window.innerWidth < 768">
+     x-init="
+     // Set sideNav based on initial screen size
+     sideNav = window.innerWidth >= 768;
+     // Watch for changes in screen size
+     $watch('isSmallScreen', value => { if (!value) sideNav = true; else sideNav = false; });
+    "
+    @resize.window="isSmallScreen = window.innerWidth < 768; sideNav = !isSmallScreen">
+ 
     
     {{-- Sidenav Start --}}
     <div 
