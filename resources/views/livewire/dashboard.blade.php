@@ -17,7 +17,7 @@
         :class="{'@click.outside': isSmallScreen}" 
         @click.outside="isSmallScreen && (sideNav = false)"
 
-    class="absolute h-full w-4/6 p-8 flex flex-col justify-between border-e-2 bg-white text-bold  sm:w-3/6 md:w-3/12 md:static md:min-h-screen xl:w-1/6 ">
+    class="absolute h-full w-4/6 p-8 flex flex-col justify-between shadow-lg bg-white text-bold  sm:w-3/6 md:w-3/12 md:static md:min-h-screen xl:w-1/6 ">
         <div class="">
             <div class="mb-5 flex justify-between">
                 <h4 class="font-bold">VMS App</h4>
@@ -84,7 +84,7 @@
     x-transition:leave="transition ease-in duration-300"
 
     >
-        <div class="p-4 flex justify-between border-b-2">
+        <div class="p-4 flex justify-between shadow-sm">
             <button @click="sideNav = !sideNav" class=""><x-heroicon-s-bars-3 class="w-6 h-6" /></button>
             <div class="flex gap-2 items-center">
                 <div class="border rounded-full p-1 flex">
