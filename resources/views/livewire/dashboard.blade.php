@@ -1,22 +1,28 @@
-<div class="w-full d-flex" x-data="{ open: false }">
+<div class="w-full relative min-h-screen flex" 
+     x-data="{ sideNav: false, isSmallScreen: window.innerWidth < 768 }"
+     x-init="$watch('isSmallScreen', value => { if (!value) sideNav = false; })"
+     @resize.window="isSmallScreen = window.innerWidth < 768">
+    
     {{-- Sidenav Start --}}
     <div 
-    x-show="open" 
-    x-transition:enter="transition ease-out duration-300"
-    x-transition:enter-start="-translate-x-full"
-    x-transition:enter-end="translate-x-0"
-    x-transition:leave="transition ease-in duration-300"
-    x-transition:leave-start="translate-x-0"
-    x-transition:leave-end="-translate-x-full"
-    {{-- Close sidenav if clicked outside --}}
-    @click.outside="open = false"
+        x-show="sideNav" 
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="-translate-x-full"
+        x-transition:enter-end="translate-x-0"
+        x-transition:leave="transition ease-in duration-300"
+        x-transition:leave-start="translate-x-0"
+        x-transition:leave-end="-translate-x-full"
+        
+        {{-- Apply click.outside only if it's a small screen --}}
+        :class="{'@click.outside': isSmallScreen}" 
+        @click.outside="isSmallScreen && (sideNav = false)"
 
-    class="absolute h-full w-4/6 -ms-0 p-8 flex flex-col justify-between bg-white text-bold">
+    class="absolute h-full w-4/6 p-8 flex flex-col justify-between border-e-2 bg-white text-bold  sm:w-3/6 md:w-3/12 md:static md:min-h-screen xl:w-1/6 ">
         <div class="">
             <div class="mb-5 flex justify-between">
                 <h4 class="font-bold">VMS App</h4>
-                <div class="">
-                    <button @click="open = false"><x-heroicon-s-chevron-left  class="w-6 h-6"/></button>
+                <div class="md:hidden">
+                    <button @click="sideNav = false"><x-heroicon-s-chevron-left  class="w-6 h-6"/></button>
                 </div>
             </div>
             <div class="flex flex-col gap-1 mb-3">            
@@ -70,10 +76,21 @@
     </div>
     {{-- Sidenav End --}}
 
-    <div class="bg-yellow-500">
-        <div class="p-4  flex justify-between bg-amber-500">
-            <button @click="open = true" class=""><x-heroicon-s-bars-3 class="w-6 h-6" /></button>
-            <div>
+    {{-- Main Content Start --}}
+    <div 
+    class="w-full"
+    
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:leave="transition ease-in duration-300"
+
+    >
+        <div class="p-4 flex justify-between border-b-2">
+            <button @click="sideNav = !sideNav" class=""><x-heroicon-s-bars-3 class="w-6 h-6" /></button>
+            <div class="flex gap-2 items-center">
+                <div class="border rounded-full p-1 flex">
+                    {{-- <x-heroicon-o-moon  class="w-6 h-6"/> --}}
+                    <x-heroicon-o-sun  class="w-6 h-6"/>
+                </div>
                 <img 
                     src="https://via.placeholder.com/150" 
                     alt="Avatar"
@@ -81,8 +98,9 @@
                 />
             </div>
         </div>
-        <div class="p-5 bg-orange-500"> 
+        <div class="p-5 "> 
             main
         </div>
     </div>
-</div>
+    {{-- Main Content End --}}
+</div> 
