@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('guest_visits', function (Blueprint $table) {
-            $table->ulid('id');
+            $table->id();
             $table->foreignUlid('id_guest'); 
             $table->string('reason');
             $table->foreignUlid('id_user')->nullable(); // appointment employee id
             $table->dateTime('clock_in');
-            $table->dateTime('clock_out');
+            $table->dateTime('clock_out')->nullable(); ;
             $table->timestamps();
         });
     }

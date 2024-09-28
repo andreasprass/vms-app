@@ -3,5 +3,9 @@
 @tailwind utilities;
 
 .active {
-    @apply bg-stone-900 text-white rounded-md
+    @apply bg-blue-950 text-white rounded-md
+}
+
+.sideNavHover {
+    @apply hover:bg-blue-800 hover:text-white hover:rounded-md
 }

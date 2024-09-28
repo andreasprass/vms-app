@@ -18,6 +18,9 @@ class GuestVisitFactory extends Factory
     {
         return [
             //
+            'id_guest' => 1,
+            'reason' => "Factory Visit",
+            'clock_in' => fake()->dateTimeThisMonth(),
         ];
     }
 }

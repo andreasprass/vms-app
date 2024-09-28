@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('guests', function (Blueprint $table) {
             $table->ulid('id');
             $table->string('name');
-            $table->string('id_type'); //KTP, SIM etc
-            $table->bigInteger('id_number');
-            $table->binary('person_image');
-            $table->integer('status'); // Allowed, Not Aallowed 
+            $table->string('identity_type'); //KTP, SIM etc
+            $table->bigInteger('identity_number');
+            $table->binary('person_image')->nullable();
+            $table->integer('status')->default(1); // Allowed, Not Aallowed 
             $table->timestamps();
         });
     }

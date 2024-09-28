@@ -26,8 +26,8 @@ class GuestFactory extends Factory
             //
             'id' => Str::ulid(),
             'name' => fake()->name(),
-            'id_type' => fake()->randomElement($id_type),
-            'id_number' => $randId,
+            'identity_type' => fake()->randomElement($id_type),
+            'identity_number' => $randId,
             'person_image' => fake()->imageUrl(640,640,'people'),
             'status' => mt_rand(0,1),
         ];
