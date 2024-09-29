@@ -1,5 +1,8 @@
-<div class="w-full relative min-h-screen flex" 
-    x-data="{ sideNav: $persist(false), isSmallScreen: window.innerWidth < 768 }"
+<div class="w-full relative flex h-screen" 
+    x-data="{ 
+        sideNav: $persist(false), 
+        isSmallScreen: window.innerWidth < 768 
+    }"
     x-init="
         // Initialize sideNav state
         if (window.innerWidth >= 768) { 
@@ -9,6 +12,8 @@
         $watch('isSmallScreen', value => {
             if (!value) {
                 sideNav = true; // Keep sideNav open on larger screens
+            } else {
+                sideNav = false; // Close it on smaller screens
             }
         });
     "
@@ -23,8 +28,8 @@
         x-transition:leave="transition ease-in duration-300"
         x-transition:leave-start="translate-x-0"
         x-transition:leave-end="-translate-x-full"
-        class="absolute h-full w-4/6 p-8 flex flex-col justify-between shadow-lg bg-blue-900 text-white text-bold sm:w-3/6 md:w-3/12 md:static md:min-h-screen xl:w-1/6"
-        @click.outside="sideNav = false"
+        class="absolute h-full w-4/6 p-8 flex flex-col justify-between shadow-lg bg-blue-900 text-white text-bold sm:w-3/6 md:w-3/12 md:static xl:w-1/6"
+        @click.outside="sideNav = isSmallScreen ? false : sideNav"
         >
 
         <div>
@@ -83,7 +88,7 @@
     {{-- Sidenav End --}}
 
     {{-- Main --}}
-    <div class="w-full" x-transition:enter="transition ease-out duration-300" x-transition:leave="transition ease-in duration-300">
+    <div class="w-full h-full overflow-y-auto" x-transition:enter="transition ease-out duration-300" x-transition:leave="transition ease-in duration-300">
         {{-- Top Nav --}}
         <div class="p-4 flex justify-between shadow-sm">
             <button @click="sideNav = !sideNav" class=""><x-heroicon-s-bars-3 class="w-6 h-6" /></button>
@@ -148,7 +153,6 @@
                             </div>
                         </div>
                         {{-- statistic end --}}
-
                         {{-- statistic start --}}
                         <div class="p-4 bg-white rounded-3xl flex flex-col gap-3">
                             <div class="flex justify-between items-center">

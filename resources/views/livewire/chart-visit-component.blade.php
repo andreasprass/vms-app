@@ -26,9 +26,9 @@
             class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-xl text-blue-900 bg-white  shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" >
               <div class="py-1" >
                 <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-                <a href="#" class="block px-4 py-2 text-sm">Daily</a>
-                <a href="#" class="block px-4 py-2 text-sm">Monthly</a>
-                <a href="#" class="block px-4 py-2 text-sm">Yearly</a>
+                <a href="#" class="block px-4 py-2 text-sm hover:bg-slate-100">Daily</a>
+                <a href="#" class="block px-4 py-2 text-sm hover:bg-slate-100">Monthly</a>
+                <a href="#" class="block px-4 py-2 text-sm hover:bg-slate-100">Yearly</a>
               </div>
             </div>
           </div>
@@ -36,29 +36,40 @@
     <canvas id="chart1"></canvas>
 </div>
   
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  
-  <script>
-    const ctx = document.getElementById('chart1');
-  
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          borderWidth: 1,
-          lineTension: 0.3,
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('chart1');
+
+  const totals = {!! json_encode($totals) !!};  // Convert PHP array to JS array
+  const dates = {!! json_encode($dates) !!};    // Convert PHP array to JS array
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: dates,  // Use the dates array
+      datasets: [{
+        label: '# of Visits',
+        data: totals,  // Use the totals array
+        borderWidth: 1,
+        lineTension: 0.3,
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            // Set step size to 1
+            stepSize: 1,
+            // Use callback to ensure ticks are whole numbers
+            callback: function(value) {
+              return Number.isInteger(value) ? value : ''; // Only show integers
+            }
           }
         }
       }
-    });
-  </script>
+    }
+  });
+</script>
 

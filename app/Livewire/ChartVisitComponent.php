@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\GuestVisit;
+use Carbon\Carbon; // Import Carbon for date formatting
 
 class ChartVisitComponent extends Component
 {
@@ -20,7 +21,10 @@ class ChartVisitComponent extends Component
             ->get();
 
         // Prepare dates and totals for Chart.js
-        $this->dates = $visits->pluck('date')->toArray();
+        $this->dates = $visits->pluck('date')->map(function ($date) {
+            return Carbon::parse($date)->format('d M'); // Format as '28 March'
+        })->toArray();
+
         $this->totals = $visits->pluck('total')->toArray();
     }
 
