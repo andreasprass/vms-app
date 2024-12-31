@@ -5,19 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>{{ isset($title) ? "$title | VMS WebApp" : 'VMS WebApp' }}</title>
-
-        {{-- <link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}"> --}}
-
         @livewireStyles
-        @vite(['resources/css/app.css','resources/js/app.js'])
+        @vite('resources/css/app.css')
     </head>
     <body class="h-full w-full">
         {{ $slot }}
 
-
-        {{-- <script src="{{ asset('js/datatables.min.js') }}"></script> --}}
         @livewireScripts
-        
-
-       </body>
+    </body>
 </html>

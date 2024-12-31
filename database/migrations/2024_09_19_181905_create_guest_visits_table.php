@@ -16,8 +16,9 @@ return new class extends Migration
             $table->foreignUlid('id_guest'); 
             $table->string('reason');
             $table->foreignUlid('id_user')->nullable(); // appointment employee id
-            $table->dateTime('clock_in');
-            $table->dateTime('clock_out')->nullable(); ;
+            $table->dateTime('clock_in')->nullable();
+            $table->dateTime('clock_out')->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

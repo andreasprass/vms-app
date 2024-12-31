@@ -30,7 +30,7 @@ class ChartVisitComponent extends Component
 
     public function render()
     {
-        return view('livewire.chart-visit-component', [
+        return view('livewire..dashboard.chart-visit-component', [
             'dates' => $this->dates,
             'totals' => $this->totals,
         ]);
